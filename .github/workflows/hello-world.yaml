@@ -9,5 +9,7 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
+        with:
+          repository: JuozasVainauskas/gh-shared-workflows-test
       - name: Run hello-world.sh
         run: ./scripts/hello-world.sh
