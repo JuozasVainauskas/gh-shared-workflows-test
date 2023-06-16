@@ -1,0 +1,25 @@
+name: Test workflow name
+run-name: Test workflow run name
+on:
+  workflow_call:
+
+jobs:
+  run-shared-workflow:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Check out source Repo
+        uses: actions/checkout@v3
+        with:
+          path: repo
+      - name: Check out test script
+        uses: actions/checkout@v3
+        with:
+          repository: JuozasVainauskas/gh-shared-workflows-test
+          path: shared
+          sparse-checkout: |
+            scripts/test.sh
+          sparse-checkout-cone-mode: false
+      - name: Run test script
+        env:
+          TEST_VAL: ${{ github.repository }}
+        run: bash ./shared/scripts/test.sh
